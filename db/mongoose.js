@@ -1,7 +1,6 @@
 // const connection =
 //   'mongodb+srv://moti:1234@cluster0.5l2ct.mongodb.net/data-center-2?retryWrites=true&w=majority';
-const connection =
-  'mongodb+srv://moti:moti2003@cluster0.6grtp.mongodb.net/world-of-tzedaka?retryWrites=true&w=majority';
+const connection = process.env.MONGODB_URI;
 const mongoose = require('mongoose');
 const options = {
   useNewUrlParser: true,

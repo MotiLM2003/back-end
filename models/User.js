@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
     certificateNumber: { type: Number, default: 0 },
     creditCardNumber: { type: Number, default: 0 },
     creditCardExpire: { type: Date, default: 0 },
+    rabiList: { type: Array, default: [] },
     CVC: { type: Number, default: 0 },
 
     role: { type: { type: String, default: 'user', trim: true } },
@@ -44,8 +45,39 @@ userSchema.methods.toJSON = function () {
   delete userObject.tokens;
   delete userObject.__v;
   delete userObject.password;
+  delete userObject.creditCardNumber;
+  delete userObject.creditCardExpire;
+  delete userObject.creditCardExpire;
 
   return userObject;
+};
+
+userSchema.statics.findByCredentials = async (email, password) => {
+  const filters = { email, password: password };
+  console.log(' filters: ', filters);
+  const user = await User.findOne({ filters });
+  console.log('db user', user);
+  if (!user || user === null) {
+    return { message: 'unable to log in email' };
+  }
+
+  return user;
+};
+
+userSchema.methods.generateAuthToken = async function () {
+  const user = this;
+  const token = await jwt.sign(
+    { _id: user._id.toString() },
+    process.env.JWTSECRET,
+    {
+      expiresIn: '365 days',
+    }
+  );
+  try {
+    user.tokens = user.tokens.concat({ token });
+    user.save();
+  } catch (error) {}
+  return token;
 };
 
 const User = mongoose.model('Users', userSchema);

@@ -12,12 +12,12 @@ const origin = process.env.ORIGIN;
 process.on('uncaughtException', function (err) {
   console.log(err);
 });
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: origin,
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: origin,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());

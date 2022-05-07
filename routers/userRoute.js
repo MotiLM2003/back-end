@@ -4,23 +4,17 @@ const router = new express.Router();
 
 const {
   addUser,
-  //   initLogin,
+  initLogin,
   //   getAllUsers,
   //   logOut,
   //   logOutAll,
-  //   validateToken,
+  validateToken,
   //   updateById,
   //   saveUser,
 } = require('../controllers/userController');
 
-// router.post('/login', initLogin);
-// router.post('/validateToken', validateToken);
-
-router.get('/', function (req, res) {
-  console.log('here');
-  res.send('Hello there');
-});
-
+router.post('/login', initLogin);
+router.post('/validateToken', validateToken);
 router.post('/', addUser);
 // router.get('/', auth, getAllUsers);
 // router.post('/logout', auth, logOut);
