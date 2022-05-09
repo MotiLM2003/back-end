@@ -54,9 +54,8 @@ userSchema.methods.toJSON = function () {
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const filters = { email, password: password };
-  console.log(' filters: ', filters);
   const user = await User.findOne({ filters });
-  console.log('db user', user);
+
   if (!user || user === null) {
     return { message: 'unable to log in email' };
   }

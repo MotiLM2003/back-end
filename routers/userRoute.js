@@ -13,6 +13,9 @@ const {
   //   saveUser,
 } = require('../controllers/userController');
 
+router.get('/', (req, res) => {
+  res.send('hello');
+});
 router.post('/login', initLogin);
 router.post('/validateToken', validateToken);
 router.post('/', addUser);
