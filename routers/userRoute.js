@@ -7,9 +7,10 @@ const {
   initLogin,
   //   getAllUsers,
   //   logOut,
+  getUsers,
   //   logOutAll,
   validateToken,
-  //   updateById,
+  updateUserById,
   //   saveUser,
 } = require('../controllers/userController');
 
@@ -19,7 +20,8 @@ router.get('/', (req, res) => {
 router.post('/login', initLogin);
 router.post('/validateToken', validateToken);
 router.post('/', addUser);
-// router.get('/', auth, getAllUsers);
+router.post('/get', getUsers);
+router.post('/UpdateById', updateUserById);
 // router.post('/logout', auth, logOut);
 // router.post('/logoutAll', auth, logOutAll);
 // router.post('/save-user/', auth, saveUser);
