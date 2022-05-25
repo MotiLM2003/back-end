@@ -56,7 +56,6 @@ const validateToken = async (req, res) => {
 
 const updateUserById = async (req, res) => {
   const user = updateById(req.body);
-
   res.status(201).send(user);
 };
 

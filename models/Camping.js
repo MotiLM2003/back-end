@@ -5,6 +5,7 @@ const campaignSchema = new mongoose.Schema(
     isDescription: { type: Boolean, default: true, required: true },
     isEndDate: { type: Boolean, default: true, required: true },
     isDonorList: { type: Boolean, default: true, required: true },
+    isGoal: { type: Boolean, default: true },
     isPresrDontaion: {
       type: Boolean,
       default: true,
