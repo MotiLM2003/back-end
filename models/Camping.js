@@ -29,6 +29,7 @@ const campaignSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+
     isMainBanner: { type: Boolean, default: true, required: true },
     status: { type: Number, default: 0, required: true },
     campaignName: { type: String, default: '', trim: true, required: true },
