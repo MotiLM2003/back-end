@@ -1,6 +1,5 @@
-const User = require('../models/User');
+const User = require("../models/User");
 const getAll = async (filters = {}) => {
-  console.log(' here');
   console.log(filters);
   const users = await User.find(filters);
   console.log(users);
@@ -21,7 +20,7 @@ const addNewUser = async (data) => {
 
     return user;
   } catch (err) {
-    console.log('err', err);
+    console.log("err", err);
     return err;
   }
 };
@@ -45,7 +44,7 @@ const updateById = async (filters = {}) => {
     const user = await User.updateOne({ _id }, filters);
     return user;
   } catch (err) {
-    console.log('err', err);
+    console.log("err", err);
   }
 };
 
