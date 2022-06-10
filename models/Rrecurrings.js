@@ -7,6 +7,11 @@ const recurringSchema = new mongoose.Schema(
       default: true,
       required: true,
     },
+    isPrivateDonation: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     displayName: { type: String, default: "", required: true },
     currency: { type: Number, default: 0, required: true },
     sum: { type: Number, default: 0, required: true },

@@ -1,4 +1,4 @@
-const { addNewRecurring } = require("../actions/recurringDBActions");
+const { addNewRecurring, getAll } = require("../actions/recurringDBActions");
 
 const Rrecurrings = require("../models/Rrecurrings");
 // const getAll = async (filters = {}) => {
@@ -11,7 +11,16 @@ const Rrecurrings = require("../models/Rrecurrings");
 
 const addRecurring = async (req, res) => {
   try {
-    const newRecurring = await addNewRecurring(req.body);
+    const { recurring, privateRecurring } = req.body;
+    console.log(req.body);
+    const newRecurring = await addNewRecurring(recurring);
+    const newPrivateRecurring = null;
+    if (privateRecurring.sum > 0) {
+      privateRecurring.displayName = recurring.displayName;
+
+      await addNewRecurring(privateRecurring);
+    }
+
     res.status(201).send(newRecurring);
   } catch (err) {
     console.log("err", err);
@@ -19,6 +28,15 @@ const addRecurring = async (req, res) => {
   }
 };
 
+const getDonations = async (req, res) => {
+  try {
+    const donations = await getAll(req.body);
+    res.send(donations);
+  } catch (e) {
+    console.log(e);
+    res.send(e);
+  }
+};
 // const DBgetUserById = async (_id) => {
 //   try {
 //     const user = await User.findOne({
@@ -42,5 +60,5 @@ const addRecurring = async (req, res) => {
 //   }
 // };
 
-module.exports = { addRecurring };
+module.exports = { addRecurring, getDonations };
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

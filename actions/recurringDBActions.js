@@ -9,4 +9,11 @@ const addNewRecurring = async (data) => {
   }
 };
 
-module.exports = { addNewRecurring };
+const getAll = async (filters = {}) => {
+  console.log(filters);
+  const donations = await Recurring.find(filters);
+  console.log(donations);
+  return donations;
+};
+
+module.exports = { addNewRecurring, getAll };
