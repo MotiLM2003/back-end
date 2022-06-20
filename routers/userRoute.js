@@ -1,5 +1,5 @@
-const express = require('express');
-const auth = require('../middleware/auth');
+const express = require("express");
+const auth = require("../middleware/auth");
 const router = new express.Router();
 
 const {
@@ -12,16 +12,16 @@ const {
   validateToken,
   updateUserById,
   //   saveUser,
-} = require('../controllers/userController');
+} = require("../controllers/userController");
 
-router.get('/', (req, res) => {
-  res.send('hello');
+router.get("/", (req, res) => {
+  res.send("hello");
 });
-router.post('/login', initLogin);
-router.post('/validateToken', validateToken);
-router.post('/', addUser);
-router.post('/get', getUsers);
-router.post('/UpdateById', updateUserById);
+router.post("/login", initLogin);
+router.post("/validateToken", validateToken);
+router.post("/", addUser);
+router.post("/get", getUsers);
+router.post("/UpdateById", updateUserById);
 // router.post('/logout', auth, logOut);
 // router.post('/logoutAll', auth, logOutAll);
 // router.post('/save-user/', auth, saveUser);

@@ -15,18 +15,19 @@ const recurringSchema = new mongoose.Schema(
     displayName: { type: String, default: "", required: true },
     currency: { type: Number, default: 0, required: true },
     sum: { type: Number, default: 0, required: true },
+    fee: { type: Number, default: 0, required: true },
     isRecurring: { type: Boolean, default: true },
-    recurringTimeline: {
-      type: Number,
-      default: 0,
-      required: true,
-    },
     recurringType: {
       type: Number,
       default: 0,
       required: true,
     },
     recurringCount: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    currentRecurringCount: {
       type: Number,
       default: 0,
       required: true,
@@ -44,7 +45,21 @@ const recurringSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    isCompleteFee: { type: Boolean, default: false, required: true },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    isUpdatedByAdmin: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    isCompleteFee: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     publicNote: {
       type: String,
       default: "",
@@ -78,6 +93,10 @@ const recurringSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    privateNote: {
+      type: String,
+      default: "",
+    },
     paymentType: {
       type: Number,
       default: 0,
@@ -96,6 +115,11 @@ const recurringSchema = new mongoose.Schema(
       default: "",
     },
     isMarketingEmail: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    isImmediatePayment: {
       type: Boolean,
       default: false,
       required: true,

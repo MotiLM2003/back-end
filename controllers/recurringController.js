@@ -1,4 +1,12 @@
-const { addNewRecurring, getAll } = require("../actions/recurringDBActions");
+const {
+  addNewRecurring,
+  getAll,
+  updateById,
+} = require("../actions/recurringDBActions");
+
+const { addNewPayments } = require("../actions/paymentsDBActions");
+
+const { getNewPayment } = require("../utils/payments");
 
 const Rrecurrings = require("../models/Rrecurrings");
 // const getAll = async (filters = {}) => {
@@ -12,13 +20,22 @@ const Rrecurrings = require("../models/Rrecurrings");
 const addRecurring = async (req, res) => {
   try {
     const { recurring, privateRecurring } = req.body;
-    console.log(req.body);
+    if (recurring.isImmediatePayment) {
+      // increasing recurring count
+      recurring.currentRecurringCount = 1;
+    }
     const newRecurring = await addNewRecurring(recurring);
+    addImmediatePayment(newRecurring);
     const newPrivateRecurring = null;
     if (privateRecurring.sum > 0) {
       privateRecurring.displayName = recurring.displayName;
 
-      await addNewRecurring(privateRecurring);
+      if (newPrivateRecurring.isImmediatePayment) {
+        // increasing recurring count
+        // recurring = { ...recurring, currentRecurringCount: 1 };
+      }
+      const newPrivateRecurring = await addNewRecurring(privateRecurring);
+      addImmediatePayment(newPrivateRecurring);
     }
 
     res.status(201).send(newRecurring);
@@ -26,6 +43,14 @@ const addRecurring = async (req, res) => {
     console.log("err", err);
     res.send(err);
   }
+};
+
+// adding new payment if
+const addImmediatePayment = (recurring) => {
+  if (!recurring.isImmediatePayment) return;
+  let payment = getNewPayment(recurring);
+  // console.log("new payment", payment);
+  addNewPayments(payment);
 };
 
 const getDonations = async (req, res) => {
@@ -37,6 +62,12 @@ const getDonations = async (req, res) => {
     res.send(e);
   }
 };
+
+const updateRecurringById = async (req, res) => {
+  const recurring = updateById(req.body);
+  res.status(201).send(recurring);
+};
+
 // const DBgetUserById = async (_id) => {
 //   try {
 //     const user = await User.findOne({
@@ -60,5 +91,5 @@ const getDonations = async (req, res) => {
 //   }
 // };
 
-module.exports = { addRecurring, getDonations };
+module.exports = { addRecurring, getDonations, updateRecurringById };
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

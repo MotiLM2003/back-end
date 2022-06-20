@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const campaignSchema = new mongoose.Schema(
   {
@@ -32,23 +32,22 @@ const campaignSchema = new mongoose.Schema(
 
     isMainBanner: { type: Boolean, default: true, required: true },
     status: { type: Number, default: 0, required: true },
-    campaignName: { type: String, default: '', trim: true, required: true },
-    shortDescription: { type: String, default: '' },
-    campaignContent: { type: String, default: '' },
+    campaignName: { type: String, default: "", trim: true, required: true },
+    shortDescription: { type: String, default: "" },
+    campaignContent: { type: String, default: "" },
     goal: { type: Number, default: 0, required: true },
     bonusGoal: { type: Number, default: 0 },
     endDate: { type: Date, trim: true },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Users',
+      ref: "Users",
       required: true,
     },
   },
-
   {
     timestamps: true,
   }
 );
 
-const Camping = mongoose.model('Campaigns', campaignSchema);
+const Camping = mongoose.model("Campaigns", campaignSchema);
 module.exports = Camping;

@@ -10,10 +10,25 @@ const addNewRecurring = async (data) => {
 };
 
 const getAll = async (filters = {}) => {
-  console.log(filters);
-  const donations = await Recurring.find(filters);
-  console.log(donations);
+  const donations = await Recurring.find(filters).populate({
+    path: "campaign",
+    model: "Campaigns",
+    select: { _id: 1, campaignName: 1 },
+  });
   return donations;
 };
 
-module.exports = { addNewRecurring, getAll };
+const updateById = async (filters = {}) => {
+  try {
+    const { _id } = filters;
+
+    delete filters._id;
+    const recurring = await Recurring.updateOne({ _id }, filters);
+    return recurring;
+  } catch (err) {
+    console.log("err", err);
+    return null;
+  }
+};
+
+module.exports = { addNewRecurring, getAll, updateById };

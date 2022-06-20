@@ -3,13 +3,14 @@ const auth = require("../middleware/auth");
 const router = new express.Router();
 
 const {
-  addRecurring,
-  getDonations,
-  updateRecurringById,
-} = require("../controllers/recurringController");
-router.post("/get/", getDonations);
-router.post("/", addRecurring);
-router.put("/update", updateRecurringById);
+  addPayment,
+  getPayments,
+  //   UpdateCampingById,
+  //   getCampingById,
+} = require("../controllers/paymentsController");
+router.post("/", addPayment);
+router.post("/get", getPayments);
+// router.put("/update", UpdateCampingById);
 // router.post("/getOne", getCampingById);
 // router.get('/', auth, getAllUsers);
 // router.post('/logout', auth, logOut);
