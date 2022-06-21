@@ -27,13 +27,20 @@ const paymentsSchema = new mongoose.Schema(
       default: 0,
       required: true,
     },
-    isRecurring: { type: Boolean, default: true },
+    isRecurring: {
+      type: Boolean,
+      default: true,
+    },
     recurringCount: {
       type: Number,
       default: 0,
       required: true,
     },
-    status: { type: Number, default: 0, required: true },
+    status: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
     isAnonymous: {
       type: Boolean,
       default: false,
@@ -53,6 +60,11 @@ const paymentsSchema = new mongoose.Schema(
     paymentType: {
       type: Number,
       default: 0,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
       required: true,
     },
     recurring: {
