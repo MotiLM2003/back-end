@@ -5,11 +5,13 @@ const router = new express.Router();
 const {
   addPayment,
   getPayments,
+  addTransaction,
   //   UpdateCampingById,
   //   getCampingById,
 } = require("../controllers/paymentsController");
 router.post("/", addPayment);
 router.post("/get", getPayments);
+router.post("/addTransaction", addTransaction);
 // router.put("/update", UpdateCampingById);
 // router.post("/getOne", getCampingById);
 // router.get('/', auth, getAllUsers);

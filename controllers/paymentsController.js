@@ -4,6 +4,8 @@ const {
   updateById,
   DBgetCampingById,
 } = require("../actions/paymentsDBActions");
+const { increaseRecurringCount } = require("../actions/recurringDBActions");
+
 const addPayment = async (req, res) => {
   try {
     const newPayment = await addNewPayments(req.body);
@@ -41,9 +43,18 @@ const getPayments = async (req, res) => {
   }
 };
 
+const addTransaction = async (req, res) => {
+  // adding recurring count
+  const newPayment = await addNewPayments(req.body);
+  increaseRecurringCount({ _id: newPayment.recurring });
+
+  res.send(newPayment);
+};
+
 module.exports = {
   addPayment,
   getPayments,
+  addTransaction,
   //   UpdateCampingById,
   //   getCampingById,
 };

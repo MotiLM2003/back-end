@@ -30,12 +30,12 @@ const addRecurring = async (req, res) => {
     if (privateRecurring.sum > 0) {
       privateRecurring.displayName = recurring.displayName;
 
-      if (newPrivateRecurring.isImmediatePayment) {
+      if (newPrivateRecurring?.isImmediatePayment) {
         // increasing recurring count
         // recurring = { ...recurring, currentRecurringCount: 1 };
       }
-      const newPrivateRecurring = await addNewRecurring(privateRecurring);
-      addImmediatePayment(newPrivateRecurring);
+      const newPrivateRecurringResult = await addNewRecurring(privateRecurring);
+      addImmediatePayment(newPrivateRecurringResult);
     }
 
     res.status(201).send(newRecurring);
@@ -47,7 +47,7 @@ const addRecurring = async (req, res) => {
 
 // adding new payment if
 const addImmediatePayment = (recurring) => {
-  if (!recurring.isImmediatePayment) return;
+  if (!recurring?.isImmediatePayment) return;
   let payment = getNewPayment(recurring);
   // console.log("new payment", payment);
   addNewPayments(payment);

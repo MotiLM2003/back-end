@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const paymentsSchema = new mongoose.Schema(
   {
+    createdDate: {
+      type: Date,
+      default: Date.now(),
+      required: true,
+    },
     isPrivateDonation: {
       type: Boolean,
       default: false,
@@ -28,6 +33,7 @@ const paymentsSchema = new mongoose.Schema(
       default: 0,
       required: true,
     },
+    status: { type: Number, default: 0, required: true },
     isAnonymous: {
       type: Boolean,
       default: false,

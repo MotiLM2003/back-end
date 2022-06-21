@@ -31,4 +31,25 @@ const updateById = async (filters = {}) => {
   }
 };
 
-module.exports = { addNewRecurring, getAll, updateById };
+const increaseRecurringCount = async (filters = {}) => {
+  try {
+    const { _id } = filters;
+
+    delete filters._id;
+    const recurring = await Recurring.findOneAndUpdate(
+      { _id, _id },
+      { $inc: { currentRecurringCount: 1 } }
+    );
+    return recurring;
+  } catch (err) {
+    console.log("err", err);
+    return null;
+  }
+};
+
+module.exports = {
+  addNewRecurring,
+  getAll,
+  updateById,
+  increaseRecurringCount,
+};

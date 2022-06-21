@@ -25,8 +25,8 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
-let full = encode("ePVAHN0toEMQdU2h2wi18ENqLjDohPAA:123456");
-console.log(full);
+// let full = encode("ePVAHN0toEMQdU2h2wi18ENqLjDohPAA:123456");
+// console.log(full);
 
 // Loading routes
 app.use("/users", userRouter);
