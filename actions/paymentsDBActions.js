@@ -19,7 +19,6 @@ const getAll = async (filters = {}) => {
 };
 
 const addNewPayments = async (data) => {
-  console.log(data);
   const pa = new Payments(data);
   try {
     const payment = await pa.save();

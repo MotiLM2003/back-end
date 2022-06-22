@@ -17,6 +17,9 @@ const getNewPayment = (r) => {
     paymentType: r.paymentType,
     campaign: r.campaign,
     recurring: r._id,
+    isCompletedPayment: false,
+    paymentResponseDetails: {},
+
     reference_id: uuid.v4(),
   };
 

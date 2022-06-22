@@ -4,6 +4,13 @@ const {
   updateById,
   DBgetCampingById,
 } = require("../actions/paymentsDBActions");
+
+const { DBGetRecurringById } = require("../actions/recurringDBActions");
+
+const {
+  handlePaymentAction,
+} = require("../utils/PaymentsSources/controlPayments");
+
 const { increaseRecurringCount } = require("../actions/recurringDBActions");
 
 const addPayment = async (req, res) => {
@@ -16,20 +23,15 @@ const addPayment = async (req, res) => {
   }
 };
 
-// const getCampingById = async (req, res) => {
-//   const customer = await DBgetCampingById(req.body);
-
-//   res.send(customer);
-// };
-// const UpdateCampingById = async (req, res) => {
-//   try {
-//     const response = await updateById(req.body);
-//     res.status(201).send(response);
-//   } catch (err) {
-//     console.log("err", err);
-//     res.send(err);
-//   }
-// };
+const UpdateCampingById = async (req, res) => {
+  try {
+    const response = await updateById(req.body);
+    res.status(201).send(response);
+  } catch (err) {
+    console.log("err", err);
+    res.send(err);
+  }
+};
 
 const getPayments = async (req, res) => {
   try {
@@ -44,10 +46,25 @@ const getPayments = async (req, res) => {
 };
 
 const addTransaction = async (req, res) => {
+  const { paymentType, recurring } = req.body;
+  const newRecurring = await DBGetRecurringById(recurring);
+  handlePaymentAction(newRecurring, { action: "charge" });
+
+  return;
+  // Getting user
+  try {
+    console.log(req.body);
+  } catch (err) {
+    console.log(err);
+  }
+  // charging
+  // handlePaymentAction(user.paymentType, { option: 1 });
+
+  // console.log(user);
+  return;
   // adding recurring count
   const newPayment = await addNewPayments(req.body);
   increaseRecurringCount({ _id: newPayment.recurring });
-
   res.send(newPayment);
 };
 
@@ -55,6 +72,6 @@ module.exports = {
   addPayment,
   getPayments,
   addTransaction,
+
   //   UpdateCampingById,
-  //   getCampingById,
 };

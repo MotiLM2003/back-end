@@ -8,6 +8,7 @@ const userRouter = require("./routers/userRoute");
 const campingRouter = require("./routers/campignRoute");
 const recurrringRouter = require("./routers/recurrringRoute");
 const paymentRouter = require("./routers/paymentRoute");
+const benqestRoute = require("./routers/benqestRoute");
 //  END ROUTERS
 const cors = require("cors");
 const { use } = require("express/lib/router");
@@ -29,6 +30,7 @@ app.use(cookieParser());
 // console.log(full);
 
 // Loading routes
+app.use("/benqest", benqestRoute);
 app.use("/users", userRouter);
 app.use("/users/get", userRouter);
 app.use("/campaigns", campingRouter);

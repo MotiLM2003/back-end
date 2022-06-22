@@ -5,7 +5,6 @@ const {
 } = require("../actions/recurringDBActions");
 
 const { addNewPayments } = require("../actions/paymentsDBActions");
-
 const { getNewPayment } = require("../utils/payments");
 
 const Rrecurrings = require("../models/Rrecurrings");
@@ -16,6 +15,11 @@ const Rrecurrings = require("../models/Rrecurrings");
 //   console.log(users);
 //   return users;
 // };
+
+const getRecurringById = async (req, res) => {
+  const recurring = await DBGetRecurringById(req.body.recurring);
+  res.send(recurring);
+};
 
 const addRecurring = async (req, res) => {
   try {
@@ -91,5 +95,10 @@ const updateRecurringById = async (req, res) => {
 //   }
 // };
 
-module.exports = { addRecurring, getDonations, updateRecurringById };
+module.exports = {
+  addRecurring,
+  getDonations,
+  updateRecurringById,
+  getRecurringById,
+};
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

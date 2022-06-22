@@ -31,6 +31,16 @@ const paymentsSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    isCompletedPayment: {
+      type: Boolean,
+      default: true,
+    },
+    completedPaymentDate: {
+      type: Date,
+    },
+    paymentResponseDetails: {
+      type: Object,
+    },
     recurringCount: {
       type: Number,
       default: 0,

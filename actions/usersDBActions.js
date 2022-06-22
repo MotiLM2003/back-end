@@ -29,7 +29,7 @@ const DBgetUserById = async (_id) => {
     const user = await User.findOne({
       _id,
     });
-    return customer;
+    return user;
   } catch (err) {
     return { error: err };
   }

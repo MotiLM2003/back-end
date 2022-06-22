@@ -47,9 +47,21 @@ const increaseRecurringCount = async (filters = {}) => {
   }
 };
 
+const DBGetRecurringById = async (_id) => {
+  try {
+    const recurring = await Recurring.findOne({
+      _id,
+    });
+    return recurring;
+  } catch (err) {
+    return { error: err };
+  }
+};
+
 module.exports = {
   addNewRecurring,
   getAll,
   updateById,
   increaseRecurringCount,
+  DBGetRecurringById,
 };
