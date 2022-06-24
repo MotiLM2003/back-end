@@ -114,6 +114,22 @@ const recurringSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    routing_number: {
+      type: String,
+      default: "",
+    },
+    account_number: {
+      type: String,
+      default: "",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    sec_code: {
+      type: String,
+      default: "",
+    },
     isMarketingEmail: {
       type: Boolean,
       default: false,
