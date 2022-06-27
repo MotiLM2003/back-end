@@ -12,7 +12,7 @@ const handleAction = async (recurring, options) => {
     cvv2: CVC,
     card: creditCardNumber,
   };
-  console.log("ex", creditCardExpire);
+
   switch (action) {
     case "charge": {
       console.log("chargin credit card", cardDetails);

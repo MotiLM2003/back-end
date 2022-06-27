@@ -36,7 +36,6 @@ const UpdateCampingById = async (req, res) => {
 const getPayments = async (req, res) => {
   try {
     console.log(req.body);
-
     const lst = await getAll(req.body);
 
     res.send(lst);

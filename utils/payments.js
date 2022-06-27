@@ -1,7 +1,6 @@
 const uuid = require("uuid");
 
 const getNewPayment = (r) => {
-  console.log("in payments", r);
   //   creating new payment object.
   const payment = {
     createdDate: Date.now(),

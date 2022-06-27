@@ -130,11 +130,17 @@ const recurringSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    isAgreeToTerms: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     isMarketingEmail: {
       type: Boolean,
       default: false,
       required: true,
     },
+
     isImmediatePayment: {
       type: Boolean,
       default: false,
