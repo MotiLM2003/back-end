@@ -9,6 +9,9 @@ const campingRouter = require("./routers/campignRoute");
 const recurrringRouter = require("./routers/recurrringRoute");
 const paymentRouter = require("./routers/paymentRoute");
 const paymentsInterfaceRoute = require("./routers/paymentsInterfaceRoute");
+const currenciesRoute = require("./routers/currenciesRoute");
+
+// payment interface routes
 const benqestRoute = require("./routers/benqestRoute");
 //  END ROUTERS
 const cors = require("cors");
@@ -38,6 +41,7 @@ app.use("/campaigns", campingRouter);
 app.use("/recurring", recurrringRouter);
 app.use("/payments", paymentRouter);
 app.use("/payments-interface", paymentsInterfaceRoute);
+app.use("/currencies/", currenciesRoute);
 
 app.listen(PORT, () => {
   console.log(`Listen the port ${PORT}`);

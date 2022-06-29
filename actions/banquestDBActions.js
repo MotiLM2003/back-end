@@ -17,7 +17,6 @@ const charge = async (cardDetails = {}) => {
     const newCard = { ...card, ...cardDetails };
     const json = JSON.stringify(newCard);
     const results = await api.post("/charge/", json);
-    console.log("results", results);
     return results;
   } catch (err) {
     return er;
