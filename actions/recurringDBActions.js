@@ -1,5 +1,6 @@
 const Recurring = require("../models/Rrecurrings");
 const addNewRecurring = async (data) => {
+  console.log(data)
   const recurring = new Recurring(data);
   try {
     const newRecurring = await recurring.save();
@@ -14,7 +15,7 @@ const getAll = async (filters = {}) => {
     path: "campaign",
     model: "Campaigns",
     select: { _id: 1, campaignName: 1 },
-  });
+  }).populate("currency").populate('paymentInterface');
   return donations;
 };
 

@@ -13,7 +13,12 @@ const recurringSchema = new mongoose.Schema(
       required: true,
     },
     displayName: { type: String, default: "", required: true },
-    currency: { type: Number, default: 0, required: true },
+    currency:  {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Currencies",
+      required: true,
+    },
+
     sum: { type: Number, default: 0, required: true },
     fee: { type: Number, default: 0, required: true },
     isRecurring: { type: Boolean, default: true },
@@ -151,6 +156,14 @@ const recurringSchema = new mongoose.Schema(
       ref: "Campaigns",
       required: true,
     },
+
+    paymentInterface: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PaymentsInterface",
+      required: true,
+    },
+
+    
   },
 
   {

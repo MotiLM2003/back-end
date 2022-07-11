@@ -11,7 +11,7 @@ const getAll = async (filters = {}) => {
         _id: 1,
         recurringCount: 1,
         currentRecurringCount: 1,
-      });
+      }).populate("currency");;
     return payments;
   } catch (err) {
     console.log(err);

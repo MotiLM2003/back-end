@@ -12,9 +12,9 @@ const paymentsSchema = new mongoose.Schema(
       default: false,
       required: true,
     },
-    currency: {
-      type: Number,
-      default: 0,
+    currency:   {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Currencies",
       required: true,
     },
     sum: {
@@ -80,6 +80,11 @@ const paymentsSchema = new mongoose.Schema(
     recurring: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Recurrings",
+      required: true,
+    },
+    paymentInterface: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PaymentsInterface",
       required: true,
     },
     campaign: {

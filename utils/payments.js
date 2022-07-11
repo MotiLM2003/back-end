@@ -14,6 +14,7 @@ const getNewPayment = (r) => {
     isAnonymous: r.isAnonymous,
     isCompleteFee: r.isCompleteFee,
     paymentType: r.paymentType,
+    paymentInterface : r.paymentInterface,
     campaign: r.campaign,
     recurring: r._id,
     isCompletedPayment: false,

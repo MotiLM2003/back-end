@@ -42,6 +42,8 @@ const addRecurring = async (req, res) => {
       addImmediatePayment(newPrivateRecurringResult);
     }
 
+    
+
     res.status(201).send(newRecurring);
   } catch (err) {
     console.log("err", err);
@@ -51,6 +53,7 @@ const addRecurring = async (req, res) => {
 
 // adding new payment if
 const addImmediatePayment = (recurring) => {
+  
   if (!recurring?.isImmediatePayment) return;
   let payment = getNewPayment(recurring);
   // console.log("new payment", payment);

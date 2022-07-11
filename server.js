@@ -20,12 +20,12 @@ const { decode, encode } = require("base-64");
 const app = express();
 const PORT = process.env.PORT;
 const origin = process.env.ORIGIN;
-process.on("uncaughtException", function (err) {});
+process.on("uncaughtException", function(err) {});
 app.use(
-  cors({
-    credentials: true,
-    origin: origin,
-  })
+    cors({
+        credentials: true,
+        origin: origin,
+    })
 );
 
 app.use(express.json());
@@ -44,5 +44,5 @@ app.use("/payments-interface", paymentsInterfaceRoute);
 app.use("/currencies/", currenciesRoute);
 
 app.listen(PORT, () => {
-  console.log(`Listen the port ${PORT}`);
+    console.log(`Listen the port ${PORT}`);
 });
