@@ -9,7 +9,13 @@ const campingRouter = require("./routers/campignRoute");
 const recurrringRouter = require("./routers/recurrringRoute");
 const paymentRouter = require("./routers/paymentRoute");
 const paymentsInterfaceRoute = require("./routers/paymentsInterfaceRoute");
-const currenciesRoute = require("./routers/currenciesRoute");
+const currenciesRoute = require("./routers/currenciesRoute"); 
+const loggerRouter = require("./routers/loggerRouter"); 
+const tasksRouter = require("./routers/tasksRouter"); 
+const { initialTasks, stopTask,tasks} = require("./TasksEngine/taskEngine");
+
+
+const {addLogger} = require("./actions/loggerDBActions"); 
 
 // payment interface routes
 const benqestRoute = require("./routers/benqestRoute");
@@ -42,7 +48,17 @@ app.use("/recurring", recurrringRouter);
 app.use("/payments", paymentRouter);
 app.use("/payments-interface", paymentsInterfaceRoute);
 app.use("/currencies/", currenciesRoute);
+app.use("/logger/", loggerRouter);
+app.use("/tasks/", tasksRouter);
 
 app.listen(PORT, () => {
     console.log(`Listen the port ${PORT}`);
+    addInitialLog();
+    initialTasks();
+   
+   
 });
+
+const addInitialLog = async () => {
+   await addLogger({ loggerId : 0, statusCode  : 200 , descriptionId  : 0, params : [PORT]});
+}

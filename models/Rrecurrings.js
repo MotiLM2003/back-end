@@ -162,6 +162,10 @@ const recurringSchema = new mongoose.Schema(
       ref: "PaymentsInterface",
       required: true,
     },
+    lastPaymentDate: {
+      type: Date,
+      required: true,
+    }
 
     
   },

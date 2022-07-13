@@ -22,8 +22,8 @@ const userSchema = new mongoose.Schema(
     creditCardExpire: { type: Date, default: 0 },
     rabiList: { type: Array, default: [] },
     CVC: { type: Number, default: 0 },
-
     role: { type: { type: String, default: 'user', trim: true } },
+    
     tokens: [
       {
         token: {

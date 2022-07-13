@@ -15,7 +15,7 @@ const handleAction = async (recurring, options) => {
 
   switch (action) {
     case "charge": {
-      console.log("chargin credit card", cardDetails);
+      console.log("charging credit card", cardDetails);
       try {
         const newCharger = await charge(cardDetails);
         console.log(newCharger.data);

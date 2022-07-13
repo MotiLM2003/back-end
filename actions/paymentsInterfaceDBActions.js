@@ -11,7 +11,7 @@ const getAll = async (filters = {}) => {
 
 const updateById = async (filters = {}) => {
   try {
-    console.log(filters);
+   
     const { _id } = filters;
     delete filters._id;
     const pInterface = await PaymentsInterface.updateOne({ _id }, filters);

@@ -2,6 +2,8 @@ const {
   addNewRecurring,
   getAll,
   updateById,
+  DBGetRecurringById,
+  DBGetRecurringTaskList
 } = require("../actions/recurringDBActions");
 
 const { addNewPayments } = require("../actions/paymentsDBActions");
@@ -21,6 +23,10 @@ const getRecurringById = async (req, res) => {
   res.send(recurring);
 };
 
+const getRecurringTaskList = async (req, res) => {
+  const recurring = await DBGetRecurringTaskList(req.body);
+  res.send(recurring.filter(x=> x.paymentInterface !== null));
+}
 const addRecurring = async (req, res) => {
   try {
     const { recurring, privateRecurring } = req.body;
@@ -103,5 +109,6 @@ module.exports = {
   getDonations,
   updateRecurringById,
   getRecurringById,
+  getRecurringTaskList
 };
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

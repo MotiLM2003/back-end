@@ -1,6 +1,6 @@
 const Recurring = require("../models/Rrecurrings");
 const addNewRecurring = async (data) => {
-  console.log(data)
+
   const recurring = new Recurring(data);
   try {
     const newRecurring = await recurring.save();
@@ -59,10 +59,30 @@ const DBGetRecurringById = async (_id) => {
   }
 };
 
+
+const DBGetRecurringTaskList = async (filters) => {
+  try {
+    const recurring = await Recurring.find({ 
+      $or : [{recurringCount : 0 }, {  $expr :  {$lt: ['$currentRecurringCount','$recurringCount']}}],
+      $and : [{ isActive : true}]
+    }).populate({
+      path: 'paymentInterface',
+      match: { id: 0 },
+    });
+    return recurring;
+  } catch (err) {
+    console.log(err)
+    return { error: err };
+  }
+};
+
+
+
 module.exports = {
   addNewRecurring,
   getAll,
   updateById,
   increaseRecurringCount,
   DBGetRecurringById,
+  DBGetRecurringTaskList
 };

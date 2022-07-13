@@ -26,10 +26,7 @@ adminSchema.methods.toJSON = function() {
 
     delete adminObject.tokens;
     delete adminObject.__v;
-    delete adminObject.password;
-    delete adminObject.creditCardNumber;
-    delete adminObject.creditCardExpire;
-    delete adminObject.creditCardExpire;
+ 
 
     return adminObject;
 };
