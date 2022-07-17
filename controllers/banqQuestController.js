@@ -1,8 +1,8 @@
-const { charge } = require("../actions/banquestDBActions");
+const { chargeCreditcard } = require("../actions/banquestDBActions");
 
 const addCreditcardCharge = async (req, res) => {
   try {
-    const results = await charge(req.body);
+    const results = await chargeCreditcard(req.body);
     if (results.data) {
       res.status(201).send(results.data);
     } else {
@@ -13,6 +13,10 @@ const addCreditcardCharge = async (req, res) => {
     res.status(401).send(err);
   }
 };
+
+
+
+
 
 module.exports = {
   addCreditcardCharge,

@@ -20,10 +20,10 @@ const addNewCamping = async (data) => {
 
 const DBgetCampingById = async (_id) => {
   try {
-    const customer = await Camping.findOne({
+    const camp = await Camping.findOne({
       _id,
-    });
-    return customer;
+    }).populate('owner');
+    return camp;
   } catch (err) {
     return { error: err };
   }

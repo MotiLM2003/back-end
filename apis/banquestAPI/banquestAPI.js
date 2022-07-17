@@ -1,5 +1,5 @@
 const axios = require("axios");
-const baseURL = process.env.BENQUEST_URL;
+const baseURL = process.env.BENQUEST_URI;
 //    process.env.NEXT_PUBLIC_BASEURL || process.env.REACT_APP_BACKEND_URL;
 let headers = { "Content-Type": "application/json" };
 

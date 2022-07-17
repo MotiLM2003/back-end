@@ -49,10 +49,11 @@ const increaseRecurringCount = async (filters = {}) => {
 };
 
 const DBGetRecurringById = async (_id) => {
+  console.log(_id)
   try {
     const recurring = await Recurring.findOne({
       _id,
-    });
+    }).populate("currency").populate('campaign').populate('paymentInterface');
     return recurring;
   } catch (err) {
     return { error: err };

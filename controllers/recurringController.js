@@ -8,7 +8,7 @@ const {
 
 const { addNewPayments } = require("../actions/paymentsDBActions");
 const { getNewPayment } = require("../utils/payments");
-
+const { apiSelector } = require("../apis/apiSelector");
 const Rrecurrings = require("../models/Rrecurrings");
 // const getAll = async (filters = {}) => {
 //   console.log(' here');
@@ -19,7 +19,7 @@ const Rrecurrings = require("../models/Rrecurrings");
 // };
 
 const getRecurringById = async (req, res) => {
-  const recurring = await DBGetRecurringById(req.body.recurring);
+  const recurring = await DBGetRecurringById(req.body);
   res.send(recurring);
 };
 
@@ -27,25 +27,42 @@ const getRecurringTaskList = async (req, res) => {
   const recurring = await DBGetRecurringTaskList(req.body);
   res.send(recurring.filter(x=> x.paymentInterface !== null));
 }
+
 const addRecurring = async (req, res) => {
   try {
     const { recurring, privateRecurring } = req.body;
     if (recurring.isImmediatePayment) {
       // increasing recurring count
       recurring.currentRecurringCount = 1;
+      recurring.isByEngine = false;
     }
-    const newRecurring = await addNewRecurring(recurring);
+     const newRecurring = await addNewRecurring(recurring);
+    // checking for API 
+
+    console.log("Calling API  Selector".green);
+    const results = await apiSelector(newRecurring._id);
+    console.log('returnning', results);
+  
+     if(results.isApproved) {
+      newRecurring.reference_id = results.data.reference_number;
+     } else {
+       console.log('failed')
+     }
+
+
     addImmediatePayment(newRecurring);
     const newPrivateRecurring = null;
     if (privateRecurring.sum > 0) {
       privateRecurring.displayName = recurring.displayName;
 
       if (newPrivateRecurring?.isImmediatePayment) {
-        // increasing recurring count
-        // recurring = { ...recurring, currentRecurringCount: 1 };
+        privateRecurring.currentRecurringCount = 1;
+        recurring.isByEngine = false;
       }
+
+
       const newPrivateRecurringResult = await addNewRecurring(privateRecurring);
-      addImmediatePayment(newPrivateRecurringResult);
+      // addImmediatePayment(newPrivateRecurringResult);
     }
 
     
@@ -58,11 +75,12 @@ const addRecurring = async (req, res) => {
 };
 
 // adding new payment if
-const addImmediatePayment = (recurring) => {
+ const addImmediatePayment = (recurring) => {
   
   if (!recurring?.isImmediatePayment) return;
   let payment = getNewPayment(recurring);
   // console.log("new payment", payment);
+ 
   addNewPayments(payment);
 };
 
@@ -81,17 +99,6 @@ const updateRecurringById = async (req, res) => {
   res.status(201).send(recurring);
 };
 
-// const DBgetUserById = async (_id) => {
-//   try {
-//     const user = await User.findOne({
-//       _id,
-//     });
-//     return customer;
-//   } catch (err) {
-//     return { error: err };
-//   }
-// };
-
 // const updateById = async (filters = {}) => {
 //   try {
 //     const { _id } = filters;
@@ -109,6 +116,8 @@ module.exports = {
   getDonations,
   updateRecurringById,
   getRecurringById,
-  getRecurringTaskList
+  getRecurringTaskList,
+  addImmediatePayment,
+  getRecurringById
 };
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

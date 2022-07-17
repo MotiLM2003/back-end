@@ -1,6 +1,7 @@
 const { ToadScheduler, SimpleIntervalJob, Task : engineTask } = require('toad-scheduler')
 const {addLogger} = require('../actions/loggerDBActions');
-const  { getAll, updateById} = require('../actions/tasksDBActions')
+const  { getAll, updateById} = require('../actions/tasksDBActions');
+const { taskChargeRecurrings} = require('./taskChargeRecurrings');
 const tasks = [];
 const scheduler = new ToadScheduler()
 
@@ -43,7 +44,8 @@ const chargeRecurrings = async (task) => {
         descriptionId  : 3, 
        params : [task.description]});
 
- console.log('charge recurrings', task.description)
+       taskChargeRecurrings();
+
 }
 
 
@@ -53,7 +55,7 @@ const updatePending = async (task) => {
         statusCode  : 201 ,
         descriptionId  : 3, 
        params : [task.description]});
-    console.log('update pending')
+    // console.log('update pending')
 }
 
 
@@ -63,7 +65,7 @@ const constUpdateExchangeRate = async (task) => {
         statusCode  : 201 ,
         descriptionId  : 3, 
        params : [task.description]});
-    console.log('update exchange rate')
+    // console.log('update exchange rate')
     
 }
 
@@ -124,7 +126,7 @@ const getTaskStatus = (id) => {
 }
 
 const runTask = async (task) => {
-    console.log('running task', task)
+    // console.log('running task', task)
     getTaskAction(task);
     
 }

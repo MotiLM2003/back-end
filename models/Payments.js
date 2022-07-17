@@ -77,6 +77,11 @@ const paymentsSchema = new mongoose.Schema(
       default: false,
       required: true,
     },
+    isByEngine : {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     recurring: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Recurrings",

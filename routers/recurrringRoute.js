@@ -6,13 +6,15 @@ const {
   addRecurring,
   getDonations,
   updateRecurringById,
-  getRecurringTaskList
+  getRecurringTaskList,
+  getRecurringById
 } = require("../controllers/recurringController");
 router.post("/get/", getDonations);
+router.post("/getById/", getRecurringById);
 router.post("/", addRecurring);
 router.put("/update", updateRecurringById);
 router.post('/get-recurring-task' , getRecurringTaskList)
-// router.post("/getOne", getCampingById);
+
 // router.get('/', auth, getAllUsers);
 // router.post('/logout', auth, logOut);
 // router.post('/logoutAll', auth, logOutAll);

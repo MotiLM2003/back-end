@@ -1,7 +1,13 @@
 const uuid = require("uuid");
 
 const getNewPayment = (r) => {
-  //   creating new payment object.
+  //   creating new payment object. 
+  if(!r.reference_id) {
+    r.reference_id = 0;
+  }
+
+  console.log('reference_id', r.reference_id)
+
   const payment = {
     createdDate: Date.now(),
     isPrivateDonation: r.isPrivateDonation,
@@ -19,8 +25,7 @@ const getNewPayment = (r) => {
     recurring: r._id,
     isCompletedPayment: false,
     paymentResponseDetails: {},
-
-    reference_id: uuid.v4(),
+    reference_id : r.reference_id,
   };
 
   return payment;

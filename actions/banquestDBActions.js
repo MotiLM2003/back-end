@@ -1,5 +1,5 @@
 const api = require("../apis/banquestAPI/banquestAPI");
-const charge = async (cardDetails = {}) => {
+const chargeCreditcard = async (cardDetails = {}) => {
   // 41111111111111111
   //  12
   // 2022
@@ -23,4 +23,8 @@ const charge = async (cardDetails = {}) => {
   }
 };
 
-module.exports = { charge };
+
+const chargeACH = async (cardDetails = {}) => {
+}
+
+module.exports = { chargeCreditcard };
