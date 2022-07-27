@@ -11,6 +11,7 @@ const {
   //   logOutAll,
   validateToken,
   updateUserById,
+  searchUser
   //   saveUser,
 } = require("../controllers/userController");
 
@@ -22,6 +23,7 @@ router.post("/validateToken", validateToken);
 router.post("/", addUser);
 router.post("/get", getUsers);
 router.post("/UpdateById", updateUserById);
+router.post("/search", searchUser);
 // router.post('/logout', auth, logOut);
 // router.post('/logoutAll', auth, logOutAll);
 // router.post('/save-user/', auth, saveUser);

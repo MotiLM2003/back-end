@@ -2,7 +2,8 @@ const {
   getAll,
   addNewPayments,
   updateById,
-  DBgetCampingById,
+  getDBTotalPayments
+
 } = require("../actions/paymentsDBActions");
 
 const { DBGetRecurringById } = require("../actions/recurringDBActions");
@@ -35,7 +36,7 @@ const UpdateCampingById = async (req, res) => {
 
 const getPayments = async (req, res) => {
   try {
-    console.log(req.body);
+   
     const lst = await getAll(req.body);
 
     res.send(lst);
@@ -67,10 +68,23 @@ const addTransaction = async (req, res) => {
   res.send(newPayment);
 };
 
+
+const getTotalPayments = async (req, res) => {
+  try {
+
+    const lst = await getDBTotalPayments(req.body);
+  
+    res.send(lst);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+
 module.exports = {
   addPayment,
   getPayments,
   addTransaction,
-
+  getTotalPayments
   //   UpdateCampingById,
 };

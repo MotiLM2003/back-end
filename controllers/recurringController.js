@@ -3,7 +3,8 @@ const {
   getAll,
   updateById,
   DBGetRecurringById,
-  DBGetRecurringTaskList
+  DBGetRecurringTaskList,
+  getDBRecurringCount
 } = require("../actions/recurringDBActions");
 
 const { addNewPayments } = require("../actions/paymentsDBActions");
@@ -75,10 +76,10 @@ const addRecurring = async (req, res) => {
 };
 
 // adding new payment if
- const addImmediatePayment = (recurring) => {
+ const addImmediatePayment = async (recurring) => {
   
   if (!recurring?.isImmediatePayment) return;
-  let payment = getNewPayment(recurring);
+  let payment =  await getNewPayment(recurring);
   // console.log("new payment", payment);
  
   addNewPayments(payment);
@@ -95,9 +96,24 @@ const getDonations = async (req, res) => {
 };
 
 const updateRecurringById = async (req, res) => {
-  const recurring = updateById(req.body);
+  const recurring = await updateById(req.body);
   res.status(201).send(recurring);
 };
+
+const getRecurringCount = async (req, res) => {
+  try {
+    console.log ('body', req.body)
+    const recurringCount = await getDBRecurringCount(req.body);
+    console.log(recurringCount);
+    res.status(200)
+    res.send(recurringCount);
+  } catch(error) {
+    console.log(error);
+    res.send(error);
+
+  }
+  
+}
 
 // const updateById = async (filters = {}) => {
 //   try {
@@ -118,6 +134,7 @@ module.exports = {
   getRecurringById,
   getRecurringTaskList,
   addImmediatePayment,
-  getRecurringById
+  getRecurringById,
+  getRecurringCount
 };
 // module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };

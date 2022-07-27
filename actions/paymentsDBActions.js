@@ -1,3 +1,5 @@
+
+var mongoose = require('mongoose');
 const Payments = require("../models/Payments");
 
 const getAll = async (filters = {}) => {
@@ -28,6 +30,32 @@ const addNewPayments = async (data) => {
   }
 };
 
+
+
+const getDBTotalPayments = async (filters = {}) => {
+  let id = {}
+  if (filters.campaign) {
+     id =    { 'campaign' : new mongoose.Types.ObjectId(filters.campaign) }
+  }
+
+ try {
+
+   const payments = await Payments.aggregate([
+    { $match: id },
+      { $group:  {
+         _id : null,
+         count :  { $sum : '$sum'}
+      }}
+    ])
+    
+
+  return payments
+  } catch (err) {
+   console.log(err)
+   return {  sum : 0}
+  }
+  
+}
 // const DBgetCampingById = async (_id) => {
 //   try {
 //     const customer = await Camping.findOne({
@@ -51,4 +79,4 @@ const addNewPayments = async (data) => {
 //   }
 // };
 
-module.exports = { addNewPayments, getAll };
+module.exports = { addNewPayments, getAll ,getDBTotalPayments};

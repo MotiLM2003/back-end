@@ -4,6 +4,7 @@ const {
   addNewUser,
   updateById,
   DBgetUserById,
+  searchDBUsers
 } = require("../actions/usersDBActions");
 
 const addUser = async (req, res) => {
@@ -58,6 +59,18 @@ const updateUserById = async (req, res) => {
   res.status(201).send(user);
 };
 
+const searchUser = async (req, res) => {
+  // clgex.search('searching user')
+  try {
+  const users = await  searchDBUsers(req.body)
+
+  res.send(users)
+  } catch (err) { 
+    console.log(err)
+  } 
+  
+}
+
 module.exports = {
   addUser,
   initLogin,
@@ -66,6 +79,7 @@ module.exports = {
   //   logOutAll,
   validateToken,
   updateUserById,
+  searchUser
   //   updateById,
   //   saveUser,
 };

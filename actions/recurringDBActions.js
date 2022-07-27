@@ -49,7 +49,7 @@ const increaseRecurringCount = async (filters = {}) => {
 };
 
 const DBGetRecurringById = async (_id) => {
-  console.log(_id)
+
   try {
     const recurring = await Recurring.findOne({
       _id,
@@ -60,6 +60,12 @@ const DBGetRecurringById = async (_id) => {
   }
 };
 
+const getDBRecurringCount = async (filters = {}) => {
+  const count =   await Recurring.count(filters);
+
+  return   {count}
+
+}
 
 const DBGetRecurringTaskList = async (filters) => {
   try {
@@ -85,5 +91,6 @@ module.exports = {
   updateById,
   increaseRecurringCount,
   DBGetRecurringById,
-  DBGetRecurringTaskList
+  DBGetRecurringTaskList,
+  getDBRecurringCount
 };

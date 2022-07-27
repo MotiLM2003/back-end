@@ -47,4 +47,15 @@ const updateById = async (filters = {}) => {
   }
 };
 
-module.exports = { login, getAll, addNewUser, updateById, DBgetUserById };
+const searchDBUsers = async (filters = { searchText  : ''}) => {
+  const { searchText } = filters;
+  
+  const users = await User.find({ $or : [{ "firstName": { $regex: '.*' + searchText + '.*' }},{ "lastName": { $regex: '.*' + searchText + '.*' }} ,{ "email": { $regex: '.*' + searchText + '.*' }}  ]})
+  .select({ _id : 1 , firstName : 1, lastName : 1, email : 1, phone : 1 , idNumber : 1});
+  return users;
+}
+
+// , {lastName : /t/ },  {email : /2/ }
+
+
+module.exports = { login, getAll, addNewUser, updateById, DBgetUserById,searchDBUsers };
